@@ -1,0 +1,11 @@
+name: LearningPlugin
+version: '${project.version}'
+main: org.super89.supermegamod.learningplugin.LearningPlugin
+api-version: '1.20'
+commands:
+  player_spawn:
+    description: abaoba
+    usage: /<command>
+  gui:
+    description: /gui
+    usage: /<command>
