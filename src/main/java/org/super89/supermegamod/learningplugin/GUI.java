@@ -1,9 +1,6 @@
 package org.super89.supermegamod.learningplugin;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -17,9 +14,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.super89.supermegamod.learningplugin.Utils.ItemUtils;
 
+import java.util.HashMap;
+
 import static org.bukkit.Bukkit.getServer;
 
 public class GUI implements Listener {
+    HashMap<Player, Boolean> playerSwitches = new HashMap<Player, Boolean>();
     private ArmorStand armorStand;
 
 
@@ -53,7 +53,8 @@ public class GUI implements Listener {
     public void InventoryClick(InventoryClickEvent e){
         boolean b = false;
         Player p = (Player) e.getWhoClicked();
-        if(e.getView().getTitle().equalsIgnoreCase("     Верстак")){
+        Location loc = p.getLocation();
+        if(e.getView().getTitle().equalsIgnoreCase("     Верстак" ) && e.getCurrentItem().getType() != null){
             e.setCancelled(true);
             if(e.getCurrentItem().getType() == Material.BARRIER){
                 p.closeInventory();
@@ -66,17 +67,24 @@ public class GUI implements Listener {
                 p.sendMessage(ChatColor.GOLD + "Вы надели незеритовый сет");
                 p.closeInventory();
             } else if (e.getCurrentItem().getType() == Material.PLAYER_HEAD) {
-                if(b == false){
+
+                if (!playerSwitches.containsKey(p)) {
+                    playerSwitches.put(p, false);
+                }
+                boolean b1 = playerSwitches.get(p);
+
+                if(!b1){
                     getServer().getPluginManager().registerEvents(eventS, LearningPlugin.getPlugin(LearningPlugin.class));
-                    b = true;
+                    playerSwitches.put(p,true);
                     p.closeInventory();
 
                 }
-                if(b) {
+                if(b1) {
+                    as.teleport(new Location(p.getWorld(), 0, 100000, 0, loc.getYaw(), 0));
 
-                    as.remove();
+
                     HandlerList.unregisterAll(eventS);
-                    b = false;
+                    playerSwitches.put(p,false);
                     p.closeInventory();
                 }
 

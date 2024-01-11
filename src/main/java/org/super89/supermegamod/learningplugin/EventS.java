@@ -21,11 +21,7 @@ public class EventS implements Listener {
 
             Player player = event.getPlayer();
             String s = player.getDisplayName();
-            World world1 = player.getWorld();
-            Location loc1 = player.getLocation();
-            loc1.setY(loc1.getY() - 1);
-            armorStand = SpawnMob.SpawnArmorStand(event.getPlayer().getLocation(), "20", event.getPlayer(), s, event.getPlayer());
-            armorStand.setGravity(false);
+
 
             if (armorStand == null) {
                 World world = player.getWorld();
