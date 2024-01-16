@@ -1,11 +1,15 @@
 package org.super89.supermegamod.learningplugin.Utils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class ItemUtils {
     public static ItemStack create(Material material, int amount, byte data, String displayName, String lore1, String lore2, String lore3, String lore4){
@@ -38,10 +42,11 @@ public class ItemUtils {
     public static ItemStack create(Material material, String displayName, int amount,byte data){
         return create(material,amount,data,displayName,null,null,null,null);
     }
-    public ItemStack CreatePlayerHead(String playerName) {
+    public static ItemStack CreatePlayerHead(String playerUUID) {
         ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta headMeta = (SkullMeta) playerHead.getItemMeta();
-        headMeta.setOwner(playerName);
+
+        headMeta.setOwningPlayer(Bukkit.getOfflinePlayer(playerUUID));
         playerHead.setItemMeta(headMeta);
         return playerHead;
     }

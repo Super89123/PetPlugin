@@ -3,19 +3,21 @@ package org.super89.supermegamod.learningplugin;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.HashMap;
+
 public class EventS implements Listener {
+    GUI gui = new GUI();
 
     public ArmorStand armorStand;
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
+
 
         if(event.getPlayer().hasPermission("pet.self")) {
 
@@ -43,7 +45,9 @@ public class EventS implements Listener {
 
             armorStand.teleport(new Location(loc.getWorld(), x, y, z, loc.getYaw(), 0));
             armorStand.setRotation(loc.getYaw(), 0);
+
         }
+
 
 
     }
@@ -52,4 +56,7 @@ public class EventS implements Listener {
 
     }
 
+    public ArmorStand getArmorStand() {
+        return armorStand;
+    }
 }

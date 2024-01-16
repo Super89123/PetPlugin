@@ -19,7 +19,12 @@ import java.util.HashMap;
 import static org.bukkit.Bukkit.getServer;
 
 public class GUI implements Listener {
-    HashMap<Player, Boolean> playerSwitches = new HashMap<Player, Boolean>();
+    public static HashMap getHashMap(){
+        HashMap<Player, Boolean> playerSwitches = new HashMap<Player, Boolean>();
+        return playerSwitches;
+
+    }
+    HashMap playerSwitches = getHashMap();
     private ArmorStand armorStand;
 
 
@@ -70,8 +75,9 @@ public class GUI implements Listener {
 
                 if (!playerSwitches.containsKey(p)) {
                     playerSwitches.put(p, false);
+                    p.setMaxHealth(22);
                 }
-                boolean b1 = playerSwitches.get(p);
+                boolean b1 = (boolean) playerSwitches.get(p);
 
                 if(!b1){
                     getServer().getPluginManager().registerEvents(eventS, LearningPlugin.getPlugin(LearningPlugin.class));
@@ -80,11 +86,16 @@ public class GUI implements Listener {
 
                 }
                 if(b1) {
-                    as.teleport(new Location(p.getWorld(), 0, 100000, 0, loc.getYaw(), 0));
+                    ArmorStand as = eventS.getArmorStand();
+                    double x = 0;
+                    double y = 10000;
+                    double z = 0;
+
 
 
                     HandlerList.unregisterAll(eventS);
                     playerSwitches.put(p,false);
+                    as.teleport(new Location(p.getWorld(), x,y,z));
                     p.closeInventory();
                 }
 
