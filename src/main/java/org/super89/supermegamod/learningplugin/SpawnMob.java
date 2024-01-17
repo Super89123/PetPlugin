@@ -18,7 +18,7 @@ public class SpawnMob implements CommandExecutor {
 
     public static ArmorStand SpawnMobs;
 
-    public SpawnMob(LearningPlugin learningPlugin) {
+    public SpawnMob(PetPlugin perPlugin) {
     }
 
     @Override

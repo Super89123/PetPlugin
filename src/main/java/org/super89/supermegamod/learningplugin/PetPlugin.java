@@ -3,30 +3,27 @@ package org.super89.supermegamod.learningplugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.entity.Item;
-import org.bukkit.event.Listener;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 import org.super89.supermegamod.learningplugin.Utils.ItemUtils;
 
-import javax.naming.NamingEnumeration;
-
-public final class LearningPlugin extends JavaPlugin {
+public final class PetPlugin extends JavaPlugin {
     EventS eventS = new EventS();
     GUI gui = new GUI();
 
     @Override
     public void onEnable() {
+        NamespacedKey key = new NamespacedKey(this, "nice_pet");
 
         ItemStack i = ItemUtils.CreatePlayerHead("Super89");
         ItemMeta meta = i.getItemMeta();
         meta.setDisplayName(ChatColor.GOLD + "Открыть яйцо");
         i.setItemMeta(meta);
-        ShapedRecipe recipe = new ShapedRecipe(i);
+        ItemStack item = ItemUtils.create(Material.SPONGE, "Великая губка");
+        ShapedRecipe recipe = new ShapedRecipe(key, item);
         recipe.shape("DOD","GSG","DOD");
         recipe.setIngredient('D', Material.DIAMOND);
         recipe.setIngredient('G', Material.GOLD_INGOT);

@@ -80,7 +80,7 @@ public class GUI implements Listener {
                 boolean b1 = (boolean) playerSwitches.get(p);
 
                 if(!b1){
-                    getServer().getPluginManager().registerEvents(eventS, LearningPlugin.getPlugin(LearningPlugin.class));
+                    getServer().getPluginManager().registerEvents(eventS, PetPlugin.getPlugin(PetPlugin.class));
                     playerSwitches.put(p,true);
                     p.closeInventory();
 
